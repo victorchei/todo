@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    margin: 20px auto;
+    padding-top: 15px;
+    min-width: 300px;
+    max-width: 800px;
+    border: 5px dashed #000;
+    border-radius: 10px;    
+}
+form{
+    display: flex;
+}
+form, .cards{
+    padding-left: 20px;
+}
+
+.card{
+    display: flex;
+    padding: 5px;  
+    
+}
+.text{
+    padding-top: 5px;
+    width: 85%;
+}
+.btn{
+    border: 1px dashed #000;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    margin-left: 25px;
+}
+.add{
+    width: 40px;
+    border-radius: 3px;
+}
+.done{
+    text-decoration: line-through;
+}
