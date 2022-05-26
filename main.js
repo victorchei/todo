@@ -1,49 +1,53 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("form");
-  const cards = document.querySelector(".cards");
+import  { list } from './list.js';
 
-  const list = [
-    { text: "зробити todo" },
-    { text: "+ функцію удаляти" },
-    { text: "+ відмічати виконані" },
-  ];
+const form = document.getElementById("todo");
+const cards = document.getElementById("cards");
+const input = form.querySelector("input");
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const input = document.getElementById("input");
-    if (input.value.trim()) {
-      list.unshift({
-        text: input.value.trim(),
-      });
-      cards.innerHTML = "";
-      create(list);
-    }
-  });
-
-  function create(list) {
-    for (let el = 0; el < list.length; el++) {
-      let card = document.createElement("div");
-      card.classList.add("card");
-      card.setAttribute("id", el);
-      card.innerHTML = `
-                <div class="text">${el + 1} ${list[el].text}</div>            
-                <div class="btn yes">&#10004;</div>
-                <div class="btn del">&#10060;</div>               
-            `;
-      card.addEventListener("click", function (event) {
-        if (event.target.classList.contains("yes")) {
-          event.target
-            .closest(".card")
-            .firstElementChild.classList.toggle("done");
-        }
-        if (event.target.classList.contains("del")) {
-          const item = event.target.closest(".card").remove();
-        }
-      });
-
-      cards.insertAdjacentElement("beforeend", card);
-    }
+function clickhandler(e) {
+  const { target } = e;
+  if (target.closest('.submit')) {
+    onSubmit(e);
+  } else if (target.closest('.button-done')) {
+    makeDone(target);
+  } else if (target.closest('.button-delete')) {
+    deleteItem(target);
   }
+}
 
-  create(list);
-});
+function onSubmit(e) {
+  e.preventDefault();
+  if (input.value) {
+    createListItem(input.value.trim());
+  }
+}
+
+function makeDone(target) {
+  target.closest('.card')?.querySelector('.text')?.classList.toggle('done')
+}
+
+function deleteItem(target) {
+  target.closest('.card').remove();
+}
+
+function createListItem(item) {
+  let card = document.createElement("div");
+  card.classList.add("card");
+  card.innerHTML = `<p>
+                      <span class="button-delete">&#10060;</span>
+                      <span class="button-done">&#10004;</span>                      
+                      <span class="text">${item}</span>
+                     </p> `
+
+  cards.insertAdjacentElement("beforeend", card);
+}
+
+function initList() {
+  list.forEach((item) => {
+    createListItem(item);
+  })
+}
+
+document.addEventListener("click", clickhandler);
+
+initList();

@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+body {
+  padding: 0 10px;
+}
+
 .container {
   margin: 20px auto;
   padding: 15px;
@@ -14,6 +18,7 @@
 
 .card {
   display: flex;
+  padding-top: 10px;
 }
 
 #todo input {
@@ -22,13 +27,12 @@
 }
 
 #todo button,
-.add,
-.btn,
-.done {
+.button-delete,
+.button-done {
+  display: inline-block;
   width: auto;
   min-width: 25px;
   height: 25px;
-  margin-left: 25px;
   border: 1px dashed #000;
   border-radius: 3px;
   text-align: center;
@@ -36,4 +40,8 @@
 
 #todo button {
   padding: 0 10px;
+}
+
+.done {
+  text-decoration: line-through;
 }
